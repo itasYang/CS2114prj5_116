@@ -1,4 +1,4 @@
-package src.prj5;
+package prj5;
 
 public class Eric38026 {
 
