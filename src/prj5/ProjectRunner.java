@@ -1,12 +1,13 @@
 package prj5;
+
 import java.io.IOException;
-public class ProjectRunner
-{
-    //~ Fields ................................................................
 
-    //~ Constructors ..........................................................
+public class ProjectRunner {
+    // ~ Fields ................................................................
 
-    //~Public  Methods ........................................................
+    // ~ Constructors ..........................................................
+
+    // ~Public Methods ........................................................
     public static void main(String[] args) throws IOException {
         InputFileReader filer;
 
@@ -14,7 +15,7 @@ public class ProjectRunner
         if (args.length > 0) {
             filer = new InputFileReader(args[0]);
         } else {
-            filer = new InputFileReader("SampleInput1_2023.csv");
+            filer = new InputFileReader("SampleInput1_2023.csv");1
         }
 
         // Step 2: Show Console or GUI (set these manually for now)
@@ -28,7 +29,7 @@ public class ProjectRunner
 
         if (showGUI) {
             // TODO: For final submission - launch GUI
-            // GUI code will be added later
+            // GUI code will be added later1
         }
     }
 }
