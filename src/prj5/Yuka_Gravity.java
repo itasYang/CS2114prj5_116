@@ -1,10 +1,11 @@
 package prj5;
 
 public class Yuka_Gravity {
-    // ~ Fields ................................................................
+    public static void main(String[] args)
+    {
 
-    // ~ Constructors ..........................................................
+        System.out.println("Glad to be on your team");
 
-    // ~Public Methods ........................................................
+    }
 
 }
