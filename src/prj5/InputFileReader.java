@@ -1,117 +1,66 @@
 package prj5;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Scanner;
+import java.nio.file.Paths;
 
-/**
- * Class responsible for reading input files and generating formatted output.
- */
-public class InputFileReader {
+public class InputFileReader
 
-    private static final String[] VALID_MONTHS = { "January", "February",
-        "March", "April", "May", "June", "July", "August", "September",
-        "October", "November", "December" };
+{
+    //~ Fields ................................................................
 
-    private static final DecimalFormat FORMATTER = new DecimalFormat("#.#");
+    //~ Constructors ..........................................................
 
-    /**
-     * Reads data from a CSV file, processes first-quarter influencer stats,
-     * and writes output to a file.
-     * 
-     * @param inputFileName
-     *            the name of the input file
-     * @param outputFileName
-     *            the name of the output file
-     */
-    public void processFile(String inputFileName, String outputFileName) {
-        Scanner inStream = new Scanner(new File(inputFileName));
-        inStream.nextLine(); // Skip header
+    //~Public  Methods ........................................................
+    private LinkedList<Influencer> influencers = new LinkedList<>();
 
-        ArrayList<UserView> allData = new ArrayList<>();
+    public InputFileReader(String filename) throws IOException {
+        Scanner in = new Scanner(Paths.get(filename));
+        if (in.hasNextLine()) in.nextLine();
 
-        while (inStream.hasNextLine()) {
-            String line = inStream.nextLine().replaceAll(" ", "");
-            String[] values = line.split(",");
+        while (in.hasNextLine()) {
+            String line = in.nextLine().trim();
+            if (line.isEmpty()) continue;
+            String[] v = line.split(",");
+            String month = v[0];
+            String username = v[1];
+            String channel = v[2];
+            String country = v[3];
+            String topic = v[4];
+            int likes    = toInt(v[5]);
+            int posts    = toInt(v[6]);
+            int followers= toInt(v[7]);
+            int comments = toInt(v[8]);
+            int views    = toInt(v[9]);
 
-            if (!isValidMonth(values[0])) {
-                continue;
-            }
-
-            String month = values[0];
-            String username = values[1];
-            String channel = values[2];
-            String country = values[3];
-            String mainTopic = values[4];
-            int likes = toInt(values[5]);
-            int posts = toInt(values[6]);
-            int followers = toInt(values[7]);
-            int comments = toInt(values[8]);
-            int views = toInt(values[9]);
-
+            Influencer inf = findOrCreate(username, channel, country, topic);
+            inf.addMonthData(month, likes, comments, followers, views);
         }
+        in.close();
 
-        // Filter for Jan–Mar data only
-        ArrayList<UserView> q1Data = new ArrayList<>();
-        for (UserView data : allData) {
-            if (data.getMonth().equals("January") || data.getMonth().equals(
-                "February") || data.getMonth().equals("March")) {
-                q1Data.add(data);
-            }
-        }
 
-        // Summarize data by channel name
-        HandlingTheData aggregator = new HandlingTheData();
-
-        try (PrintWriter writer = new PrintWriter(new File(outputFileName))) {
-            for (UserView summary : aggregator.getSortedByChannelName()) {
-                writer.println(summary.getChannelName());
-                writer.println("traditional: " + FORMATTER.format(summary
-                    .getTraditionalEngagement()));
-                writer.println("==========");
-            }
-
-            writer.println("**********");
-            writer.println("**********");
-
-            for (UserView summary : aggregator.getSortedByReachEngagement()) {
-                writer.println(summary.getChannelName());
-                writer.println("reach: " + FORMATTER.format(summary
-                    .getReachEngagement()));
-                writer.println("==========");
-            }
-        }
-        catch (Exception e) {
-            System.err.println("Error writing to output file: " + e
-                .getMessage());
+        for (Influencer inf : influencers) {
+            inf.computeEngagementRates();
         }
     }
 
-
-    /**
-     * Checks if the provided month is valid.
-     */
-    private boolean isValidMonth(String month) {
-        for (String valid : VALID_MONTHS) {
-            if (valid.equalsIgnoreCase(month)) {
-                return true;
+    private Influencer findOrCreate(String user, String ch, String ctry, String top) {
+        for (Influencer inf : influencers) {
+            if (inf.getChannelName().equalsIgnoreCase(ch)) {
+                return inf;
             }
         }
-        return false;
+        Influencer ni = new Influencer(user, ch, ctry, top);
+        influencers.add(ni);
+        return ni;
     }
 
+    private int toInt(String s) {
+        try { return Integer.parseInt(s.trim()); }
+        catch (Exception e) { return 0; }
+    }
 
-    /**
-     * Converts a string to integer, returning 0 if invalid.
-     */
-    private int toInt(String str) {
-        try {
-            return Integer.parseInt(str);
-        }
-        catch (Exception e) {
-            return 0;
-        }
+    public LinkedList<Influencer> getInfluencers() {
+        return influencers;
     }
 }

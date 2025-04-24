@@ -1,5 +1,6 @@
 package prj5;
 import java.io.IOException;
+import java.text.DecimalFormat;
 public class ProjectRunner
 {
     //~ Fields ................................................................
@@ -8,27 +9,43 @@ public class ProjectRunner
 
     //~Public  Methods ........................................................
     public static void main(String[] args) throws IOException {
-        InputFileReader filer;
+        InputFileReader reader = (args.length > 0)
+            ? new InputFileReader(args[0])
+            : new InputFileReader("SampleInput1_2023.csv");
 
-        // Step 1: Read input file from args or default
-        if (args.length > 0) {
-            filer = new InputFileReader(args[0]);
-        } else {
-            filer = new InputFileReader("SampleInput1_2023.csv");
-        }
+        LinkedList<Influencer> list = reader.getInfluencers();
 
-        // Step 2: Show Console or GUI (set these manually for now)
         boolean showConsole = true;
-        boolean showGUI = false;
+        boolean showGUI     = false;
 
         if (showConsole) {
-            // TODO: For intermediate submission - print data to console
-            filer.printData();  // Assuming you have a method like this in InputFileReader
+            DecimalFormat df = new DecimalFormat("#.#");
+
+            list.insertionSort(new InfluencerChannelNameComparator());
+            for (Influencer inf : list) {
+                System.out.println(inf.getChannelName());
+                double tr = inf.getTraditionalRate();
+                String out = (tr < 0) ? "N/A" : df.format(tr);
+                System.out.println("traditional: " + out);
+                System.out.println("==========");
+            }
+
+            System.out.println("**********");
+            System.out.println("**********");
+
+
+            list.insertionSort(new InfluencerReachComparator());
+            for (Influencer inf : list) {
+                System.out.println(inf.getChannelName());
+                double rr = inf.getReachRate();
+                String out = (rr < 0) ? "N/A" : df.format(rr);
+                System.out.println("reach: " + out);
+                System.out.println("==========");
+            }
         }
 
         if (showGUI) {
-            // TODO: For final submission - launch GUI
-            // GUI code will be added later
+
         }
     }
 }
