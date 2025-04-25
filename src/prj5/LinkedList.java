@@ -16,8 +16,8 @@ import java.util.Iterator;
 public class LinkedList<T> implements Iterable<T> {
 
     private static class Node<T> {
-        T data;
-        Node<T> next;
+        private T data;
+        private Node<T> next;
 
         Node(T d) {
             data = d;

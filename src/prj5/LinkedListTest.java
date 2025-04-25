@@ -14,6 +14,10 @@ public class LinkedListTest extends student.TestCase {
 
     private LinkedList<Integer> list;
 
+    // ----------------------------------------------------------
+    /**
+     * set up method
+     */
     public void setUp() {
         list = new LinkedList<>();
     }
