@@ -1,21 +1,35 @@
 package prj5;
+
 import java.util.Comparator;
+
+// -------------------------------------------------------------------------
+/**
+ * This is a class is used to compare two Influencer object whether they reach
+ * the rate setted.
+ * 
+ * @author yinhan wang, ethen yang, boyuan zhao, chenghan yang
+ * @version 2025/04/24
+ */
 public class InfluencerReachComparator
     implements Comparator<Influencer>
 {
-    //~ Fields ................................................................
+    // ~ Fields ................................................................
 
-    //~ Constructors ..........................................................
+    // ~ Constructors ..........................................................
 
-    //~Public  Methods ........................................................
+    // ~Public Methods ........................................................
 
-    public int compare(Influencer a, Influencer b) {
+    public int compare(Influencer a, Influencer b)
+    {
         double ra = a.getReachRate();
         double rb = b.getReachRate();
 
-        if (ra < 0 && rb < 0) return 0;
-        if (ra < 0) return 1;
-        if (rb < 0) return -1;
+        if (ra < 0 && rb < 0)
+            return 0;
+        if (ra < 0)
+            return 1;
+        if (rb < 0)
+            return -1;
 
         return Double.compare(rb, ra);
     }
