@@ -159,4 +159,20 @@ public class LinkedListTest extends student.TestCase {
         list.insertionSort(Comparator.naturalOrder());
         assertEquals(0, list.size());
     }
+
+
+    // ----------------------------------------------------------
+    /**
+     * This is a test method for insertionSortEmptyList method.
+     */
+    public void testInsertion() {
+        list.add(5);
+        list.add(3);
+        list.add(4);
+        list.insertionSort(Comparator.naturalOrder());
+
+        assertEquals(3, (int)list.get(0));
+        assertEquals(4, (int)list.get(1));
+        assertEquals(5, (int)list.get(2));
+    }
 }
