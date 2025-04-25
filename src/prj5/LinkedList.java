@@ -26,7 +26,8 @@ implements Iterable<T>
         if (head == null) {
             head = node;
             tail = node;
-        } else {
+        } 
+        else {
             tail.next = node;
             tail = node;
         }
@@ -45,10 +46,12 @@ implements Iterable<T>
 
                 curr.next = sorted;
                 sorted = curr;
-            } else {
+            } 
+            else {
 
                 Node<T> p = sorted;
-                while (p.next != null && comp.compare(curr.data, p.next.data) >= 0) {
+                while (p.next != null && comp.compare(
+                    curr.data, p.next.data) >= 0) {
                     p = p.next;
                 }
                 curr.next = p.next;
@@ -88,5 +91,16 @@ implements Iterable<T>
 
     public int size() {
         return size;
+    }
+    
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.data;
     }
 }
