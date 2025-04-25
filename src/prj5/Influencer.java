@@ -10,10 +10,7 @@ package prj5;
 public class Influencer
 {
 
-    private String username;
     private String channelName;
-    private String country;
-    private String mainTopic;
 
     private int totalLikesQuarter = 0;
     private int totalCommentsQuarter = 0;
@@ -42,10 +39,7 @@ public class Influencer
         String country,
         String mainTopic)
     {
-        this.username = username;
         this.channelName = channelName;
-        this.country = country;
-        this.mainTopic = mainTopic;
     }
 
 
