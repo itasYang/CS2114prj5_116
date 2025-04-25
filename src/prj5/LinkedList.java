@@ -66,15 +66,19 @@ implements Iterable<T>
     }
 
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
             private Node<T> curr = head;
+
             @Override
             public boolean hasNext() {
                 return curr != null;
             }
+
             @Override
             public T next() {
-                if (curr == null) throw new NoSuchElementException();
+                if (!hasNext()) {
+                    throw new java.util.NoSuchElementException();
+                }
                 T data = curr.data;
                 curr = curr.next;
                 return data;
