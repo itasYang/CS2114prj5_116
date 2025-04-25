@@ -1,32 +1,46 @@
 package prj5;
+
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
-public class LinkedList<T>
-implements Iterable<T>
-{
-    //~ Fields ................................................................
 
-    //~ Constructors ..........................................................
+// -------------------------------------------------------------------------
+/**
+ * create a linked list that can sort the data
+ * 
+ * @param <T>
+ *            anytype of object
+ * 
+ * @author yinhan wang, ethan yang, boyuan zhao, chenghan yang
+ * @version 2025/04/24
+ */
+public class LinkedList<T> implements Iterable<T> {
 
-    //~Public  Methods ........................................................
     private static class Node<T> {
         T data;
         Node<T> next;
-        Node(T d) { data = d; }
+
+        Node(T d) {
+            data = d;
+        }
     }
 
     private Node<T> head = null;
     private Node<T> tail = null;
     private int size = 0;
 
-
+    // ----------------------------------------------------------
+    /**
+     * add a new element to the list and increment size
+     * 
+     * @param element
+     *            element will be added
+     */
     public void add(T element) {
         Node<T> node = new Node<>(element);
         if (head == null) {
             head = node;
             tail = node;
-        } 
+        }
         else {
             tail.next = node;
             tail = node;
@@ -35,8 +49,16 @@ implements Iterable<T>
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * sort the insertion
+     * 
+     * @param comp
+     *            comparator object
+     */
     public void insertionSort(Comparator<T> comp) {
-        if (head == null || head.next == null) return;
+        if (head == null || head.next == null)
+            return;
         Node<T> sorted = null;
 
         Node<T> curr = head;
@@ -46,12 +68,12 @@ implements Iterable<T>
 
                 curr.next = sorted;
                 sorted = curr;
-            } 
+            }
             else {
 
                 Node<T> p = sorted;
-                while (p.next != null && comp.compare(
-                    curr.data, p.next.data) >= 0) {
+                while (p.next != null && comp.compare(curr.data,
+                    p.next.data) >= 0) {
                     p = p.next;
                 }
                 curr.next = p.next;
@@ -60,7 +82,6 @@ implements Iterable<T>
             curr = next;
         }
 
-
         head = sorted;
         tail = head;
         while (tail.next != null) {
@@ -68,6 +89,17 @@ implements Iterable<T>
         }
     }
 
+
+    // -------------------------------------------------------------------------
+    /**
+     * private class iterator
+     * 
+     * @param <T>
+     *            anytype of object
+     * 
+     * @author yinhan wang, ethan yang, boyuan zhao, chenghan yang
+     * @version 2025/04/24
+     */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             private Node<T> curr = head;
@@ -76,6 +108,7 @@ implements Iterable<T>
             public boolean hasNext() {
                 return curr != null;
             }
+
 
             @Override
             public T next() {
@@ -89,13 +122,32 @@ implements Iterable<T>
         };
     }
 
+
+    // ----------------------------------------------------------
+    /**
+     * get the size of iterator
+     * 
+     * @return size
+     *         size of iterator
+     */
     public int size() {
         return size;
     }
-    
+
+
+    // ----------------------------------------------------------
+    /**
+     * get element base on index
+     * 
+     * @param index
+     *            index of element
+     * @return
+     *         element on the index
+     */
     public T get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: "
+                + size);
         }
         Node<T> current = head;
         for (int i = 0; i < index; i++) {

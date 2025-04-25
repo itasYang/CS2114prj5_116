@@ -12,6 +12,7 @@ public class LinkedListTest extends TestCase {
         list = new LinkedList<>();
     }
 
+
     public void testAddAndSize() {
         assertEquals(0, list.size());
 
@@ -22,6 +23,7 @@ public class LinkedListTest extends TestCase {
         list.add(30);
         assertEquals(3, list.size());
     }
+
 
     public void testIteratorBasic() {
         list.add(1);
@@ -38,21 +40,46 @@ public class LinkedListTest extends TestCase {
         assertFalse(it.hasNext());
     }
 
+
     public void testIteratorEmptyList() {
         Iterator<Integer> it = list.iterator();
         assertFalse(it.hasNext());
         Exception thrown = null;
         try {
             it.next();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             thrown = e;
         }
         assertNotNull(thrown);
         assertTrue(thrown instanceof java.util.NoSuchElementException);
     }
 
+
+    public void testGetException() {
+        Exception thrown = null;
+        try {
+            list.get(-1);
+        }
+        catch (Exception e) {
+            thrown = e;
+        }
+        assertNotNull(thrown);
+        Exception thrown1 = null;
+        try {
+            list.get(10);
+        }
+        catch (Exception e) {
+            thrown1 = e;
+        }
+        assertNotNull(thrown1);
+    }
+
+
     public void testInsertionSortAscending() {
+
         list.add(5);
+        list.insertionSort(Comparator.naturalOrder());
         list.add(2);
         list.add(8);
         list.add(1);
@@ -65,6 +92,7 @@ public class LinkedListTest extends TestCase {
         assertEquals(5, (int)list.get(2));
         assertEquals(8, (int)list.get(3));
     }
+
 
     public void testInsertionSortDescending() {
         list.add(5);
@@ -81,6 +109,7 @@ public class LinkedListTest extends TestCase {
         assertEquals(1, (int)list.get(3));
     }
 
+
     public void testInsertionSortSingleElement() {
         LinkedList<Integer> list = new LinkedList<>();
         list.add(5);
@@ -88,6 +117,7 @@ public class LinkedListTest extends TestCase {
         assertEquals(1, list.size());
         assertEquals(5, (int)list.get(0));
     }
+
 
     public void testInsertionSortEmptyList() {
         list.insertionSort(Comparator.naturalOrder());
