@@ -1,11 +1,14 @@
 package prj5;
-public class Influencer
-{
-    //~ Fields ................................................................
 
-    //~ Constructors ..........................................................
+// -------------------------------------------------------------------------
+/**
+ * Influencer class that handle data of influencer
+ * 
+ * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
+ * @version 2025.4.24
+ */
+public class Influencer {
 
-    //~Public  Methods ........................................................
     private String username;
     private String channelName;
     private String country;
@@ -19,7 +22,24 @@ public class Influencer
     private double traditionalRate;
     private double reachRate;
 
-    public Influencer(String username, String channelName, String country, String mainTopic) {
+    // ----------------------------------------------------------
+    /**
+     * Create a new Influencer object.
+     * 
+     * @param username
+     *            username of influencer
+     * @param channelName
+     *            channel name of influencer
+     * @param country
+     *            country
+     * @param mainTopic
+     *            main topic of influencer
+     */
+    public Influencer(
+        String username,
+        String channelName,
+        String country,
+        String mainTopic) {
         this.username = username;
         this.channelName = channelName;
         this.country = country;
@@ -27,7 +47,27 @@ public class Influencer
     }
 
 
-    public void addMonthData(String month, int likes, int comments, int followers, int views) {
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     * 
+     * @param month
+     *            which Month
+     * @param likes
+     *            number of likes
+     * @param comments
+     *            number of comments
+     * @param followers
+     *            number of followers
+     * @param views
+     *            number of views
+     */
+    public void addMonthData(
+        String month,
+        int likes,
+        int comments,
+        int followers,
+        int views) {
         if (!isValidMonth(month)) {
             return;
         }
@@ -39,36 +79,43 @@ public class Influencer
         }
     }
 
+
     private boolean isValidMonth(String month) {
-        return "January".equalsIgnoreCase(month)
-            || "February".equalsIgnoreCase(month)
-            || "March".equalsIgnoreCase(month);
+        return "January".equalsIgnoreCase(month) || "February".equalsIgnoreCase(
+            month) || "March".equalsIgnoreCase(month);
     }
 
 
     public void computeEngagementRates() {
 
         if (followersMarch > 0) {
-            traditionalRate = ( (double)(totalLikesQuarter + totalCommentsQuarter)
-                                / followersMarch ) * 100.0;
-        } else {
-            traditionalRate = -1.0;  // N/A
+            traditionalRate = ((double)(totalLikesQuarter
+                + totalCommentsQuarter) / followersMarch) * 100.0;
+        }
+        else {
+            traditionalRate = -1.0; // N/A
         }
 
         if (totalViewsQuarter > 0) {
-            reachRate = ( (double)(totalLikesQuarter + totalCommentsQuarter)
-                          / totalViewsQuarter ) * 100.0;
-        } else {
-            reachRate = -1.0;  // N/A
+            reachRate = ((double)(totalLikesQuarter + totalCommentsQuarter)
+                / totalViewsQuarter) * 100.0;
+        }
+        else {
+            reachRate = -1.0; // N/A
         }
     }
+
 
     public String getChannelName() {
         return channelName;
     }
+
+
     public double getTraditionalRate() {
         return traditionalRate;
     }
+
+
     public double getReachRate() {
         return reachRate;
     }
