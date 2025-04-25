@@ -50,4 +50,5 @@ public class InfluencerChannelNameComparatorTest extends TestCase {
         assertEquals(0, result1);
         assertEquals(0, result2);
     }
+    
 }
