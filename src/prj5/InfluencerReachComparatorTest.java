@@ -47,7 +47,7 @@ public class InfluencerReachComparatorTest extends student.TestCase {
      * this is a test method
      */
     public void testCompareDifferentReachRates() {
-        // Change B's data to increase reach rate
+        assertEquals(0, comparator.compare(influencerA, influencerB));
         influencerB = new Influencer("userB", "channelB", "USA", "Gaming");
         influencerB.addMonthData("January", 100, 100, 1000, 1000);
         influencerB.addMonthData("February", 0, 0, 1000, 0);
