@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 /**
  * This is the project runner for prj5.
  * 
- * @author yinhan wang, ethan yang, boyuan zhao, chenghan yang
+ * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
  * @version 2025/04/24
  */
 public class ProjectRunner

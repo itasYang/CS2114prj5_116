@@ -7,7 +7,7 @@ import java.util.Comparator;
  * This is a class is used to compare two Influencer object whether they reach
  * the rate setted.
  * 
- * @author yinhan wang, ethen yang, boyuan zhao, chenghan yang
+ * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
  * @version 2025/04/24
  */
 public class InfluencerReachComparator
