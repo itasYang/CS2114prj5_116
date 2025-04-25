@@ -2,7 +2,6 @@ package prj5;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import student.TestCase;
 
 // -------------------------------------------------------------------------
 /**
@@ -11,14 +10,11 @@ import student.TestCase;
  * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
  * @version 2025年4月24日
  */
-public class LinkedListTest
-    extends TestCase
-{
+public class LinkedListTest extends student.TestCase {
 
     private LinkedList<Integer> list;
 
-    public void setUp()
-    {
+    public void setUp() {
         list = new LinkedList<>();
     }
 
@@ -27,8 +23,7 @@ public class LinkedListTest
     /**
      * Test method for addAndSize method.
      */
-    public void testAddAndSize()
-    {
+    public void testAddAndSize() {
         assertEquals(0, list.size());
 
         list.add(10);
@@ -44,8 +39,7 @@ public class LinkedListTest
     /**
      * This is a test method for iteratorBasic method.
      */
-    public void testIteratorBasic()
-    {
+    public void testIteratorBasic() {
         list.add(1);
         list.add(2);
         list.add(3);
@@ -65,17 +59,14 @@ public class LinkedListTest
     /**
      * This is a test method for iteratoremptylist method.
      */
-    public void testIteratorEmptyList()
-    {
+    public void testIteratorEmptyList() {
         Iterator<Integer> it = list.iterator();
         assertFalse(it.hasNext());
         Exception thrown = null;
-        try
-        {
+        try {
             it.next();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             thrown = e;
         }
         assertNotNull(thrown);
@@ -87,25 +78,20 @@ public class LinkedListTest
     /**
      * This is a test method for getException method.
      */
-    public void testGetException()
-    {
+    public void testGetException() {
         Exception thrown = null;
-        try
-        {
+        try {
             list.get(-1);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             thrown = e;
         }
         assertNotNull(thrown);
         Exception thrown1 = null;
-        try
-        {
+        try {
             list.get(10);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             thrown1 = e;
         }
         assertNotNull(thrown1);
@@ -116,8 +102,7 @@ public class LinkedListTest
     /**
      * This is a test method for insertionSortAscending method.
      */
-    public void testInsertionSortAscending()
-    {
+    public void testInsertionSortAscending() {
 
         list.add(5);
         list.insertionSort(Comparator.naturalOrder());
@@ -127,7 +112,6 @@ public class LinkedListTest
 
         list.insertionSort(Comparator.naturalOrder());
 
-        Iterator<Integer> it = list.iterator();
         assertEquals(1, (int)list.get(0));
         assertEquals(2, (int)list.get(1));
         assertEquals(5, (int)list.get(2));
@@ -139,8 +123,7 @@ public class LinkedListTest
     /**
      * This is a test method for insertionSortDescending method.
      */
-    public void testInsertionSortDescending()
-    {
+    public void testInsertionSortDescending() {
         list.add(5);
         list.add(2);
         list.add(8);
@@ -148,7 +131,6 @@ public class LinkedListTest
 
         list.insertionSort(Comparator.reverseOrder());
 
-        Iterator<Integer> it = list.iterator();
         assertEquals(8, (int)list.get(0));
         assertEquals(5, (int)list.get(1));
         assertEquals(2, (int)list.get(2));
@@ -160,13 +142,12 @@ public class LinkedListTest
     /**
      * This is a test method for insertionSortSingleElement method.
      */
-    public void testInsertionSortSingleElement()
-    {
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(5);
-        list.insertionSort(Integer::compare);
-        assertEquals(1, list.size());
-        assertEquals(5, (int)list.get(0));
+    public void testInsertionSortSingleElement() {
+        LinkedList<Integer> list1 = new LinkedList<>();
+        list1.add(5);
+        list1.insertionSort(Integer::compare);
+        assertEquals(1, list1.size());
+        assertEquals(5, (int)list1.get(0));
     }
 
 
@@ -174,8 +155,7 @@ public class LinkedListTest
     /**
      * This is a test method for insertionSortEmptyList method.
      */
-    public void testInsertionSortEmptyList()
-    {
+    public void testInsertionSortEmptyList() {
         list.insertionSort(Comparator.naturalOrder());
         assertEquals(0, list.size());
     }
