@@ -13,12 +13,15 @@ import java.util.Comparator;
 public class InfluencerReachComparator
     implements Comparator<Influencer>
 {
-    // ~ Fields ................................................................
 
-    // ~ Constructors ..........................................................
-
-    // ~Public Methods ........................................................
-
+    // ----------------------------------------------------------
+    /**
+     * test constructor
+     * 
+     * @param a,b
+     *            two Influencer object
+     * @return return the result
+     */
     public int compare(Influencer a, Influencer b)
     {
         double ra = a.getReachRate();
