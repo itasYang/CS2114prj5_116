@@ -9,9 +9,12 @@ package prj5;
  */
 public class Influencer {
 
+    @SuppressWarnings("unused")
     private String username;
     private String channelName;
+    @SuppressWarnings("unused")
     private String country;
+    @SuppressWarnings("unused")
     private String mainTopic;
 
     private int totalLikesQuarter = 0;
@@ -49,7 +52,7 @@ public class Influencer {
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * add month data
      * 
      * @param month
      *            which Month
@@ -86,6 +89,10 @@ public class Influencer {
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * compute engagement
+     */
     public void computeEngagementRates() {
 
         if (followersMarch > 0) {
@@ -106,16 +113,37 @@ public class Influencer {
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * get channel name
+     * 
+     * @return channelName
+     *         name of channel
+     */
     public String getChannelName() {
         return channelName;
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * get traditional rate
+     * 
+     * @return traditionalRate
+     *         traditional rate
+     */
     public double getTraditionalRate() {
         return traditionalRate;
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * get reach rate
+     * 
+     * @return reachRate
+     *         the reach rate
+     */
     public double getReachRate() {
         return reachRate;
     }
