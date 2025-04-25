@@ -7,7 +7,8 @@ package prj5;
  * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
  * @version 2025.4.24
  */
-public class Influencer {
+public class Influencer
+{
 
     private String username;
     private String channelName;
@@ -39,7 +40,8 @@ public class Influencer {
         String username,
         String channelName,
         String country,
-        String mainTopic) {
+        String mainTopic)
+    {
         this.username = username;
         this.channelName = channelName;
         this.country = country;
@@ -67,56 +69,92 @@ public class Influencer {
         int likes,
         int comments,
         int followers,
-        int views) {
-        if (!isValidMonth(month)) {
+        int views)
+    {
+        if (!isValidMonth(month))
+        {
             return;
         }
         totalLikesQuarter += likes;
         totalCommentsQuarter += comments;
         totalViewsQuarter += views;
-        if ("March".equalsIgnoreCase(month)) {
+        if ("March".equalsIgnoreCase(month))
+        {
             followersMarch = followers;
         }
     }
 
 
-    private boolean isValidMonth(String month) {
-        return "January".equalsIgnoreCase(month) || "February".equalsIgnoreCase(
-            month) || "March".equalsIgnoreCase(month);
+    private boolean isValidMonth(String month)
+    {
+        return "January".equalsIgnoreCase(month)
+            || "February".equalsIgnoreCase(month)
+            || "March".equalsIgnoreCase(month);
     }
 
 
-    public void computeEngagementRates() {
+    // ----------------------------------------------------------
+    /**
+     * This is a method used to comput engagement rate.
+     */
+    public void computeEngagementRates()
+    {
 
-        if (followersMarch > 0) {
-            traditionalRate = ((double)(totalLikesQuarter
-                + totalCommentsQuarter) / followersMarch) * 100.0;
+        if (followersMarch > 0)
+        {
+            traditionalRate =
+                ((double)(totalLikesQuarter + totalCommentsQuarter)
+                    / followersMarch) * 100.0;
         }
-        else {
-            traditionalRate = -1.0; // N/A
+        else
+        {
+            traditionalRate = -1.0;
         }
 
-        if (totalViewsQuarter > 0) {
+        if (totalViewsQuarter > 0)
+        {
             reachRate = ((double)(totalLikesQuarter + totalCommentsQuarter)
                 / totalViewsQuarter) * 100.0;
         }
-        else {
-            reachRate = -1.0; // N/A
+        else
+        {
+            reachRate = -1.0;
         }
     }
 
 
-    public String getChannelName() {
+    // ----------------------------------------------------------
+    /**
+     * This is a method used to get channel name.
+     * 
+     * @return String channelName
+     */
+    public String getChannelName()
+    {
         return channelName;
     }
 
 
-    public double getTraditionalRate() {
+    // ----------------------------------------------------------
+    /**
+     * this is a method used to get traditional rate.
+     * 
+     * @return traditionalRate traditionalRate.
+     */
+    public double getTraditionalRate()
+    {
         return traditionalRate;
     }
 
 
-    public double getReachRate() {
+    // ----------------------------------------------------------
+    /**
+     * This is a method used to get ReachRate.
+     * 
+     * @return reachRate reachRate
+     */
+    public double getReachRate()
+    {
         return reachRate;
     }
 
