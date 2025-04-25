@@ -57,8 +57,9 @@ public class LinkedList<T> implements Iterable<T> {
      *            comparator object
      */
     public void insertionSort(Comparator<T> comp) {
-        if (head == null || head.next == null)
+        if (head == null || head.next == null) {
             return;
+        }
         Node<T> sorted = null;
 
         Node<T> curr = head;
@@ -94,9 +95,8 @@ public class LinkedList<T> implements Iterable<T> {
     /**
      * private class iterator
      * 
-     * @param <T>
-     *            anytype of object
-     * 
+     * @return data
+     *         date
      * @author yinhan wang, ethan yang, boyuan zhao, chenghan yang
      * @version 2025/04/24
      */
