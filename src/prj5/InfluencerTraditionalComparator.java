@@ -15,11 +15,19 @@ public class InfluencerTraditionalComparator implements Comparator<Influencer> {
         double rateA = a.getTraditionalRate();
         double rateB = b.getTraditionalRate();
 
+        boolean aInvalid = rateA < 0;
+        boolean bInvalid = rateB < 0;
 
-        if (Double.isNaN(rateA)) {
-            return Double.isNaN(rateB) ? 0 : 1;
+
+        if (aInvalid && bInvalid) {
+            return 0;
         }
-        if (Double.isNaN(rateB)) {
+
+        if (aInvalid) {
+            return 1;
+        }
+
+        if (bInvalid) {
             return -1;
         }
 
