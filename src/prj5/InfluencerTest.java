@@ -233,4 +233,5 @@ public class InfluencerTest extends student.TestCase {
         assertEquals(-1.0, influencer.
             getReachRateForMonth("InvalidMonth"), 0.001);
     }
+    
 }

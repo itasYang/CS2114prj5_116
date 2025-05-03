@@ -85,9 +85,7 @@ public class Influencer {
         totalLikesQuarter += likes;
         totalCommentsQuarter += comments;
         totalViewsQuarter += views;
-        if ("March".equalsIgnoreCase(month)) {
-            followersMarch = followers;
-        }
+
 
         if ("January".equalsIgnoreCase(month)) {
             likesJan = likes;
@@ -101,10 +99,12 @@ public class Influencer {
             viewsFeb = views;
             followersFeb = followers;
         }
-        else if ("March".equalsIgnoreCase(month)) {
+        else
+        {
             likesMar = likes;
             commentsMar = comments;
             viewsMar = views;
+            followersMarch = followers;
 
         }
     }
