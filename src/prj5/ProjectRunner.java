@@ -64,7 +64,7 @@ public class ProjectRunner {
 
 
         if (showGUI) {
-            new ChannelViewerWindow(influencers);
+            new GUIWindow(influencers);
         }
     }
 }

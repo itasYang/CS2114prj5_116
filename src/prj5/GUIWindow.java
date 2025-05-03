@@ -11,7 +11,7 @@ import student.TestableRandom;
  * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
  * @version 2025.4.24
  */
-public class ChannelViewerWindow {
+public class GUIWindow {
     private Window window;
     private LinkedList<Influencer> influencers;
 
@@ -28,7 +28,7 @@ public class ChannelViewerWindow {
      * @param influencers
      *      is data in influencers
      */
-    public ChannelViewerWindow(LinkedList<Influencer> influencers) {
+    public GUIWindow(LinkedList<Influencer> influencers) {
 
         this.influencers = influencers;
 
