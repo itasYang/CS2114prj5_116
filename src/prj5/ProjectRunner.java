@@ -27,7 +27,7 @@ public class ProjectRunner {
         LinkedList<Influencer> list = reader.getInfluencers();
 
         boolean showConsole = true;
-        boolean showGUI = false;
+        boolean showGUI = true;
 
         if (showConsole) {
             DecimalFormat df = new DecimalFormat("#.#");
@@ -53,6 +53,5 @@ public class ProjectRunner {
                 System.out.println("==========");
             }
         }
-
     }
 }
