@@ -227,7 +227,7 @@ public class ChannelViewerWindow {
              : inf.getReachRate();
     }
 
-    /** 随机颜色生成器 */
+    /** 随机颜色生成器111 */
     private Color painter() {
         TestableRandom rand = new TestableRandom();
         return new Color(
