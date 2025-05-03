@@ -5,8 +5,7 @@ import java.awt.Color;
 import java.io.IOException;
 import student.TestableRandom;
 
-public class ChannelViewerWindow
-{
+public class ChannelViewerWindow {
     private Window window;
     private LinkedList<Influencer> influencers;
 
@@ -19,17 +18,16 @@ public class ChannelViewerWindow
     private boolean traditionalRate;
     private boolean reachRate;
 
-    public ChannelViewerWindow() throws IOException
-    {
+    public ChannelViewerWindow() throws IOException {
         // 初始状态
-        sortByName        = true;
-        sortByEngagement  = false;
-        january           = false;
-        february          = false;
-        march             = false;
-        firstQuarter      = true;
-        traditionalRate   = true;
-        reachRate         = false;
+        sortByName = true;
+        sortByEngagement = false;
+        january = false;
+        february = false;
+        march = false;
+        firstQuarter = true;
+        traditionalRate = true;
+        reachRate = false;
 
         // 窗口设置
         window = new Window();
@@ -45,7 +43,8 @@ public class ChannelViewerWindow
         sortByChannelNameButton.onClick(this, "sortByChannelNameClicked");
         window.addButton(sortByChannelNameButton, WindowSide.NORTH);
 
-        Button sortByEngagementRateButton = new Button("Sort by Engagement Rate");
+        Button sortByEngagementRateButton = new Button(
+            "Sort by Engagement Rate");
         sortByEngagementRateButton.onClick(this, "sortByEngagementRateClicked");
         window.addButton(sortByEngagementRateButton, WindowSide.NORTH);
 
@@ -85,67 +84,77 @@ public class ChannelViewerWindow
 
     // ========== 事件处理 ==========
 
+
     public void quitButtonClicked(Button b) {
         System.exit(0);
     }
 
+
     public void sortByChannelNameClicked(Button b) {
-        sortByName       = true;
+        sortByName = true;
         sortByEngagement = false;
         displayChannels();
     }
 
+
     public void sortByEngagementRateClicked(Button b) {
         sortByEngagement = true;
-        sortByName       = false;
+        sortByName = false;
         displayChannels();
     }
+
 
     public void showTraditionalRate(Button b) {
         traditionalRate = true;
-        reachRate       = false;
+        reachRate = false;
         displayChannels();
     }
 
+
     public void showReachRate(Button b) {
-        reachRate       = true;
+        reachRate = true;
         traditionalRate = false;
         displayChannels();
     }
 
+
     public void showJanuary(Button b) {
-        january      = true;
-        february     = false;
-        march        = false;
+        january = true;
+        february = false;
+        march = false;
         firstQuarter = false;
         displayChannels();
     }
+
 
     public void showFebruary(Button b) {
-        january      = false;
-        february     = true;
-        march        = false;
+        january = false;
+        february = true;
+        march = false;
         firstQuarter = false;
         displayChannels();
     }
+
 
     public void showMarch(Button b) {
-        january      = false;
-        february     = false;
-        march        = true;
+        january = false;
+        february = false;
+        march = true;
         firstQuarter = false;
         displayChannels();
     }
 
+
     public void showQuarter(Button b) {
-        january      = false;
-        february     = false;
-        march        = false;
+        january = false;
+        february = false;
+        march = false;
         firstQuarter = true;
         displayChannels();
     }
 
     // ========== 绘制主逻辑 ==========
+
 
     private void displayChannels() {
         window.removeAllShapes();
@@ -153,10 +162,13 @@ public class ChannelViewerWindow
         // 1) 排序
         if (sortByName) {
             influencers.insertionSort(new InfluencerChannelNameComparator());
-        } else if (sortByEngagement) {
+        }
+        else if (sortByEngagement) {
             if (traditionalRate) {
-                influencers.insertionSort(new InfluencerTraditionalComparator());
-            } else {
+                influencers.insertionSort(
+                    new InfluencerTraditionalComparator());
+            }
+            else {
                 influencers.insertionSort(new InfluencerReachComparator());
             }
         }
@@ -171,11 +183,11 @@ public class ChannelViewerWindow
         }
 
         // 3) 条形图参数
-        int barW    = 80;
-        int gap     = 30;
-        int baseY   = 450;
-        int chartH  = 300;
-        int startX  = 50;
+        int barW = 80;
+        int gap = 30;
+        int baseY = 450;
+        int chartH = 300;
+        int startX = 50;
 
         int i = 0;
         for (Influencer inf : influencers) {
@@ -186,14 +198,15 @@ public class ChannelViewerWindow
             int y = baseY - h;
 
             // 条形
-            Rectangle bar = new Rectangle(x, y, barW, h);
-            bar.setColor(painter());
+            Shape bar = new Shape(x, y, barW, h, painter());
+
             window.addShape(bar);
 
             // 文本
-            String label = inf.getChannelName() + "\n" +
-                (raw < 0 ? "N/A" : String.format("%.1f", raw));
-            Text txt = new Text(label, x, baseY + 15);
+            String label = inf.getChannelName() + "\n" + (raw < 0
+                ? "N/A"
+                : String.format("%.1f", raw));
+            TextShape txt = new TextShape(x, baseY + 15, label);
             window.addShape(txt);
 
             i++;
@@ -201,31 +214,37 @@ public class ChannelViewerWindow
 
         // 4) 标题
         String mLabel;
-        if (january)      mLabel = "January";
-        else if (february) mLabel = "February";
-        else if (march)    mLabel = "March";
-        else               mLabel = "First Quarter (Jan–Mar)";
+        if (january)
+            mLabel = "January";
+        else if (february)
+            mLabel = "February";
+        else if (march)
+            mLabel = "March";
+        else
+            mLabel = "First Quarter (Jan–Mar)";
 
         String rateLabel = traditionalRate
             ? "Traditional Engagement Rate"
             : "Reach Engagement Rate";
 
-        Text title = new Text(
-            mLabel + "\n" + rateLabel +
-            "\nSorting by " + (sortByName ? "Channel Name" : "Engagement Rate"),
-            50, 50
-        );
+        TextShape title = new TextShape(50, 50, mLabel + "\n" + rateLabel
+            + "\nSorting by " + (sortByName
+                ? "Channel Name"
+                : "Engagement Rate"));
         window.addShape(title);
     }
+
 
     /** 根据当前状态取值 */
     private double valueFor(Influencer inf) {
         if (traditionalRate) {
             return inf.getTraditionalRate();
-        } else {
+        }
+        else {
             return inf.getReachRate();
         }
     }
+
 
     /** 随机颜色生成器 */
     private Color painter() {
