@@ -19,10 +19,10 @@ public class ChannelViewerWindow {
     private boolean reachRate;
 
     public ChannelViewerWindow(LinkedList<Influencer> influencers) {
-        // 使用传入的数据，不再硬编码读文件
+
         this.influencers = influencers;
 
-        // 初始状态
+
         sortByName        = true;
         sortByEngagement  = false;
         january           = false;
@@ -32,12 +32,11 @@ public class ChannelViewerWindow {
         traditionalRate   = true;
         reachRate         = false;
 
-        // 窗口设置
+
         window = new Window();
         window.setSize(800, 600);
         window.setTitle("Social Media Vis");
 
-        // 顶部按钮
         Button b = new Button("Sort by Channel Name");
         b.onClick(this, "sortByChannelNameClicked");
         window.addButton(b, WindowSide.NORTH);
@@ -50,7 +49,6 @@ public class ChannelViewerWindow {
         b.onClick(this, "quitButtonClicked");
         window.addButton(b, WindowSide.NORTH);
 
-        // 左侧按钮
         b = new Button("Traditional Engagement Rate");
         b.onClick(this, "showTraditionalRate");
         window.addButton(b, WindowSide.WEST);
@@ -59,7 +57,6 @@ public class ChannelViewerWindow {
         b.onClick(this, "showReachRate");
         window.addButton(b, WindowSide.WEST);
 
-        // 右侧按钮
         b = new Button("January");
         b.onClick(this, "showJanuary");
         window.addButton(b, WindowSide.EAST);
@@ -76,11 +73,11 @@ public class ChannelViewerWindow {
         b.onClick(this, "showQuarter");
         window.addButton(b, WindowSide.EAST);
 
-        // 初次绘制
+
         displayChannels();
     }
 
-    // ========== 事件处理 ==========
+
 
     public void quitButtonClicked(Button b) {
         System.exit(0);
@@ -142,12 +139,12 @@ public class ChannelViewerWindow {
         displayChannels();
     }
 
-    // ========== 绘制主逻辑 ==========
+
 
     private void displayChannels() {
         window.removeAllShapes();
 
-        // 1) 排序
+
         if (sortByName) {
             influencers.insertionSort(new InfluencerChannelNameComparator());
         }
@@ -162,7 +159,6 @@ public class ChannelViewerWindow {
             }
         }
 
-        // 2) 计算最大值（等比缩放用）
         double maxVal = 0;
         for (Influencer inf : influencers) {
             double v = valueFor(inf);
@@ -171,7 +167,6 @@ public class ChannelViewerWindow {
             }
         }
 
-        // 3) 绘制条形和标签
         int barW   = 80;
         int gap    = 30;
         int baseY  = 450;
@@ -186,11 +181,10 @@ public class ChannelViewerWindow {
             int x  = startX + i * (barW + gap);
             int y  = baseY - h;
 
-            // Shape 用于条形
+
             Shape bar = new Shape(x, y, barW, h, painter());
             window.addShape(bar);
 
-            // 文本标签
             String label = inf.getChannelName() + "\n" +
                            (raw < 0 ? "N/A"
                                     : String.format("%.1f", raw));
@@ -200,7 +194,6 @@ public class ChannelViewerWindow {
             i++;
         }
 
-        // 4) 标题
         String mLabel;
         if (january)      mLabel = "January";
         else if (february) mLabel = "February";
@@ -221,7 +214,6 @@ public class ChannelViewerWindow {
         window.addShape(title);
     }
 
-    /** 根据当前状态取值 */
     private double valueFor(Influencer inf) {
         String monthKey;
         if (january)      monthKey = "January";
@@ -237,7 +229,6 @@ public class ChannelViewerWindow {
         }
     }
 
-    /** 随机颜色生成器 */
     private Color painter() {
         TestableRandom rand = new TestableRandom();
         return new Color(
