@@ -1,15 +1,19 @@
 package prj5;
 
 import cs2.*;
+import java.io.IOException;
 import java.nio.channels.Channel;
 
 public class ChannelViewerWindow
 {
     private Window window;
+    private LinkedList<Influencer> influencers;
+    private boolean sortByChannel = true;
+    private boolean showTraditional = true;
     private Shape ch1_shape;
     private Shape ch2_shape;
     private Shape ch3_shape;
-    private Shape chn4_shape;
+    private Shape ch4_shape;
     private Channel ch1;
     private Channel ch2;
     private Channel ch3;
@@ -25,29 +29,60 @@ public class ChannelViewerWindow
     private Button firstQuarterButton;
 
     public ChannelViewerWindow()
+        throws IOException
     {
         window = new Window("Social Media Vis");
+        InputFileReader reader = new InputFileReader("SocialMediaData.csv");
+        influencers = reader.getInfluencers();
 
         quitButton = new Button("Quit");
         quitButton.onClick(this, "quitButtonClicked");
+        window.addButton(quitButton, WindowSide.SOUTH);
+
         sortByChannelNameButton = new Button("Sort by Channel Name");
+        sortByChannelNameButton.onClick(this, "sortByChannelNameClicked");
+        window.addButton(sortByChannelNameButton, WindowSide.NORTH);
 
         sortByEngagementRateButton = new Button("Sort by Engagement Rate");
+        sortByEngagementRateButton.onClick(this, "sortByEngagementRateClicked");
+        window.addButton(sortByEngagementRateButton, WindowSide.NORTH);
+
         traditionalEngagementRateButton =
             new Button("Traditional Engagement Rate");
+        traditionalEngagementRateButton.onClick(this, "showTraditionalRate");
+        window.addButton(traditionalEngagementRateButton, WindowSide.WEST);
 
         reachEngagementRateButton = new Button("Reach Engagement Rate");
+        reachEngagementRateButton.onClick(this, "showReachRate");
+        window.addButton(reachEngagementRateButton, WindowSide.WEST);
 
         januaryButton = new Button("January");
+        januaryButton.onClick(this, "showJanuary");
+        window.addButton(januaryButton, WindowSide.EAST);
+
         februaryButton = new Button("February");
+        februaryButton.onClick(this, "showFebruary");
+        window.addButton(februaryButton, WindowSide.EAST);
+
         marchButton = new Button("March");
-        firstQuarterButton = new Button("First Quarter (Jan-March)");
+        marchButton.onClick(this, "showMarch");
+        window.addButton(marchButton, WindowSide.EAST);
+
+        firstQuarterButton = new Button("First Quarter (Jan-Mar)");
+        firstQuarterButton.onClick(this, "showQuarter");
+        window.addButton(firstQuarterButton, WindowSide.EAST);
+
     }
 
 
     public void quitButtonClicked(Button button)
     {
         System.exit(0);
+    }
+
+
+    public void sortByChannelNameButtonClicked()
+    {
     }
 
 }
