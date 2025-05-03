@@ -1,92 +1,75 @@
 package prj5;
 
 import java.lang.reflect.Field;
-import student.TestCase;
 
 /**
- * Unit tests for {@link InfluencerReachComparator}.
- *
- * The comparator should order influencers in descending order of
- * <em>reach engagement rate</em> and treat any negative rate as "invalid"
- * (i.e., those influencers are pushed to the bottom of a sort).
+ * Unit tests for {@link InfluencerTraditionalComparator}.
  */
-public class InfluencerReachComparatorTest extends TestCase {
+public class InfluencerTraditionalComparatorTest extends student.TestCase {
 
-    private InfluencerReachComparator comp;
+    private InfluencerTraditionalComparator comp;
 
-    @Override
+
     public void setUp() {
-        comp = new InfluencerReachComparator();
+        comp = new InfluencerTraditionalComparator();
     }
 
     /**
-     * Helper that builds an Influencer with a given reach rate.  We use
-     * reflection because reachRate is a private field without a setter and the
-     * constructor only loads values from a CSV in the main program.
+     * Builds an {@link Influencer} with an injected traditional engagement rate.
      */
-    private Influencer makeInf(String channel, double reachRate) {
+    private Influencer inf(String channel, double traditionalRate) {
         try {
-            Influencer inf = new Influencer("user", channel, "US", "tech");
-            Field f = Influencer.class.getDeclaredField("reachRate");
+            Influencer i = new Influencer("user", channel, "US", "topic");
+            Field f = Influencer.class.getDeclaredField("traditionalRate");
             f.setAccessible(true);
-            f.setDouble(inf, reachRate);
-            return inf;
+            f.setDouble(i, traditionalRate);
+            return i;
         }
         catch (Exception e) {
-            throw new RuntimeException("Failed to build test influencer", e);
+            throw new RuntimeException("Failed to create test influencer", e);
         }
     }
 
     /**
-     * Both influencers have valid (non‑negative) reach rates.  The one with the
-     * <b>higher</b> rate should come <b>before</b> the other (i.e., comparator
-     * returns &lt; 0 when first &gt; second).
+     * Higher traditional rate should sort before (i.e., comparator returns < 0).
      */
-    public void testDescendingOrder() {
-        Influencer high = makeInf("high", 7.5);
-        Influencer low  = makeInf("low", 4.2);
+    public void testDescending() {
+        Influencer high = inf("high", 8.4);
+        Influencer low  = inf("low", 3.1);
 
-        int result = comp.compare(high, low);
-        assertTrue("higher rate should sort first", result < 0);
-
-        // Symmetry check (low vs high)
-        result = comp.compare(low, high);
-        assertTrue("lower rate should sort after", result > 0);
+        assertTrue("high rate should come first", comp.compare(high, low) < 0);
+        assertTrue("low rate should come after", comp.compare(low, high) > 0);
     }
 
     /**
-     * If the first influencer has a negative reach rate and the second does
-     * not, the comparator should return +1 (first sorts after second).
+     * First influencer has NaN rate, second valid.
      */
-    public void testFirstNegative() {
-        Influencer invalid = makeInf("invalid", -1.0);
-        Influencer valid   = makeInf("valid",   5.0);
+    public void testFirstNaN() {
+        Influencer nan  = inf("nan", Double.NaN);
+        Influencer good = inf("good", 5.0);
 
-        assertEquals("negative rate should be treated as greater (go to end)",
-            1, comp.compare(invalid, valid));
+        assertEquals("NaN should be considered larger (sent to end)", 1,
+            comp.compare(nan, good));
     }
 
     /**
-     * If the second influencer has a negative reach rate and the first does
-     * not, the comparator should return -1 (first sorts before second).
+     * Second influencer has NaN rate, first valid.
      */
-    public void testSecondNegative() {
-        Influencer valid   = makeInf("valid",   5.0);
-        Influencer invalid = makeInf("invalid", -2.0);
+    public void testSecondNaN() {
+        Influencer good = inf("good", 6.0);
+        Influencer nan  = inf("nan", Double.NaN);
 
-        assertEquals("valid rate should come before negative rate",
-            -1, comp.compare(valid, invalid));
+        assertEquals("Valid should come before NaN", -1,
+            comp.compare(good, nan));
     }
 
     /**
-     * When both reach rates are negative, the comparator should return 0 (they
-     * are considered equal for ordering purposes).
+     * Both influencers have NaN; expect equality.
      */
-    public void testBothNegative() {
-        Influencer a = makeInf("a", -3.0);
-        Influencer b = makeInf("b", -0.5);
+    public void testBothNaN() {
+        Influencer a = inf("a", Double.NaN);
+        Influencer b = inf("b", Double.NaN);
 
-        assertEquals("both negative should be treated as equal", 0,
-            comp.compare(a, b));
+        assertEquals("both NaN should be equal", 0, comp.compare(a, b));
     }
 }
