@@ -7,7 +7,7 @@ import java.util.Comparator;
  * This class is used to sort Influencer objects by channel name.
  * 
  * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
- * @version 2025年4月24日
+ * @version 2025/04/24
  */
 public class InfluencerChannelNameComparator
     implements Comparator<Influencer>

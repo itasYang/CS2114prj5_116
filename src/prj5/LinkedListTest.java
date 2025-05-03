@@ -8,7 +8,7 @@ import java.util.Iterator;
  * This is a test class for LinkedList.
  *
  * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
- * @version 2025年4月24日
+ * @version 2025/04/24
  */
 public class LinkedListTest extends student.TestCase {
 

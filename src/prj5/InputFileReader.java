@@ -10,7 +10,7 @@ import java.util.Scanner;
  * CSV input file and storing it in a list of Influencer objects
  * 
  * @author Ethan Yang, Yinhan Wang, Boyuan Zhao, Chenghan Yang
- * @version 2025年5月3日
+ * @version 2025/05/03
  */
 public class InputFileReader
 
