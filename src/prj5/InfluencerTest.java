@@ -180,4 +180,57 @@ public class InfluencerTest extends student.TestCase {
         assertEquals(-1.0, empty.getTraditionalRateForMonth("January"), 0.001);
         assertEquals(-1.0, empty.getReachRateForMonth("January"), 0.001);
     }
+    /**
+     * this is a test
+     */
+    public void testTraditionalRateForMarch() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+
+        influencer.computeEngagementRates();
+
+        assertEquals(37.5, influencer.
+            getTraditionalRateForMonth("March"), 0.001);
+    }
+    /**
+     * this is a test
+     */
+    public void testReachRateForMarch() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+
+        influencer.computeEngagementRates();
+
+        assertEquals(18.75, influencer.getReachRateForMonth("March"), 0.001);
+    }
+    /**
+     * this is a test
+     */
+    public void testTraditionalRateCaseInsensitive() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+
+        influencer.computeEngagementRates();
+        assertEquals(37.5, influencer.
+            getTraditionalRateForMonth("march"), 0.001);
+        assertEquals(37.5, influencer.
+            getTraditionalRateForMonth("MARCH"), 0.001);
+    }
+    /**
+     * this is a test
+     */
+    public void testInvalidMonthReturnsNegative() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+
+        influencer.computeEngagementRates();
+        assertEquals(-1.0, influencer.
+            getTraditionalRateForMonth("InvalidMonth"), 0.001);
+        assertEquals(-1.0, influencer.
+            getReachRateForMonth("InvalidMonth"), 0.001);
+    }
 }
