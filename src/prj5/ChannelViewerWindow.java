@@ -31,13 +31,11 @@ public class ChannelViewerWindow
     public ChannelViewerWindow()
         throws IOException
     {
-        window = new Window("Social Media Vis");
+        window = new Window();
+        window.setSize(800, 600);
+        window.setTitle("Social Media Vis");
         InputFileReader reader = new InputFileReader("SocialMediaData.csv");
         influencers = reader.getInfluencers();
-
-        quitButton = new Button("Quit");
-        quitButton.onClick(this, "quitButtonClicked");
-        window.addButton(quitButton, WindowSide.SOUTH);
 
         sortByChannelNameButton = new Button("Sort by Channel Name");
         sortByChannelNameButton.onClick(this, "sortByChannelNameClicked");
@@ -46,6 +44,10 @@ public class ChannelViewerWindow
         sortByEngagementRateButton = new Button("Sort by Engagement Rate");
         sortByEngagementRateButton.onClick(this, "sortByEngagementRateClicked");
         window.addButton(sortByEngagementRateButton, WindowSide.NORTH);
+
+        quitButton = new Button("Quit");
+        quitButton.onClick(this, "quitButtonClicked");
+        window.addButton(quitButton, WindowSide.NORTH);
 
         traditionalEngagementRateButton =
             new Button("Traditional Engagement Rate");
@@ -71,7 +73,6 @@ public class ChannelViewerWindow
         firstQuarterButton = new Button("First Quarter (Jan-Mar)");
         firstQuarterButton.onClick(this, "showQuarter");
         window.addButton(firstQuarterButton, WindowSide.EAST);
-
     }
 
 
