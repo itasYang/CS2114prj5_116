@@ -173,6 +173,14 @@ public class Influencer {
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * get traditional rate for month
+     * @param month
+     *      month in file
+     * @return
+     *      return traditional rate
+     */
     public double getTraditionalRateForMonth(String month) {
         int likes = 0, comments = 0, followers = 0;
         switch (month.toLowerCase()) {
@@ -206,6 +214,14 @@ public class Influencer {
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * to get reach rate for month
+     * @param month
+     *      month in file
+     * @return
+     *      return reach rate for month
+     */
     public double getReachRateForMonth(String month) {
         int likes = 0, comments = 0, views = 0;
         switch (month.toLowerCase()) {
