@@ -149,13 +149,14 @@ public class ChannelViewerWindow {
 
         // 1) 排序
         if (sortByName) {
-            influencers.insertionSort(
-                new InfluencerChannelNameComparator());
-        } else if (sortByEngagement) {
+            influencers.insertionSort(new InfluencerChannelNameComparator());
+        }
+        else if (sortByEngagement) {
             if (traditionalRate) {
                 influencers.insertionSort(
                     new InfluencerTraditionalComparator());
-            } else {
+            }
+            else {
                 influencers.insertionSort(
                     new InfluencerReachComparator());
             }
@@ -204,7 +205,7 @@ public class ChannelViewerWindow {
         if (january)      mLabel = "January";
         else if (february) mLabel = "February";
         else if (march)    mLabel = "March";
-        else               mLabel = "First Quarter (Jan–Mar)";
+        else               mLabel = "Quarter";
 
         String rateLabel = traditionalRate
                          ? "Traditional Engagement Rate"
@@ -222,12 +223,21 @@ public class ChannelViewerWindow {
 
     /** 根据当前状态取值 */
     private double valueFor(Influencer inf) {
-        return traditionalRate
-             ? inf.getTraditionalRate()
-             : inf.getReachRate();
+        String monthKey;
+        if (january)      monthKey = "January";
+        else if (february) monthKey = "February";
+        else if (march)    monthKey = "March";
+        else               monthKey = "Quarter";
+
+        if (traditionalRate) {
+            return inf.getTraditionalRateForMonth(monthKey);
+        }
+        else {
+            return inf.getReachRateForMonth(monthKey);
+        }
     }
 
-    /** 随机颜色生成器111 */
+    /** 随机颜色生成器 */
     private Color painter() {
         TestableRandom rand = new TestableRandom();
         return new Color(
