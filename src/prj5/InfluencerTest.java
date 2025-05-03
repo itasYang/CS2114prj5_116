@@ -5,7 +5,7 @@ package prj5;
  * test class for influencer
  * 
  * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
- * @version 2025.4.24
+ * @version 2025/4/24
  */
 public class InfluencerTest extends student.TestCase {
 

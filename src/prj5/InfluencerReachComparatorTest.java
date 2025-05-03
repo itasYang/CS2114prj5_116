@@ -5,7 +5,7 @@ package prj5;
  * This is a test class for reach comparator
  *
  * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
- * @version 2025年4月24日
+ * @version 2025/4/24
  */
 public class InfluencerReachComparatorTest extends student.TestCase {
     private InfluencerReachComparator comparator;
