@@ -9,18 +9,11 @@ import java.util.Comparator;
  * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
  * @version 2025/04/24
  */
-public class InfluencerChannelNameComparator
-    implements Comparator<Influencer>
-{
-    // ~ Fields ................................................................
+public class InfluencerChannelNameComparator implements Comparator<Influencer> {
 
-    // ~ Constructors ..........................................................
-
-    // ~Public Methods ........................................................
     @Override
-    public int compare(Influencer a, Influencer b)
-    {
+    public int compare(Influencer a, Influencer b) {
         return a.getChannelName().compareToIgnoreCase(b.getChannelName());
     }
-    
+
 }
