@@ -6,7 +6,7 @@ import student.TestableRandom;
 
 // -------------------------------------------------------------------------
 /**
- *  this is a GUI to show the graph of data
+ *  this is a GUI to show the graph of data.
  * 
  * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
  * @version 2025.4.24
