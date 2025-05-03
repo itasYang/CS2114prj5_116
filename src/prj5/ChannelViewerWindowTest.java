@@ -4,18 +4,13 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 
 
+
+// -------------------------------------------------------------------------
 /**
- * Basic GUI‑logic tests for {@link ChannelViewerWindow}.
- *
- * We do <b>not</b> verify visual output; instead we focus on the data side:
- * <ul>
- *   <li>initial alphabetic sort</li>
- *   <li>switching to engagement‑rate sort (traditional)</li>
- *   <li>switching metric to reach‑rate and re‑sorting</li>
- * </ul>
- * The CS2 <code>Window</code> draws from the same <code>Influencer</code> list the
- * whole program manipulates, so checking the <em>order</em> of that list after
- * each interaction is a reliable proxy for what the chart would show.
+ *  this is a channel viewer window test
+ * 
+ * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
+ * @version 2025.4.24
  */
 public class ChannelViewerWindowTest extends student.TestCase {
 
@@ -46,6 +41,12 @@ public class ChannelViewerWindowTest extends student.TestCase {
         return out;
     }
 
+    // ----------------------------------------------------------
+    /**
+     * this is a test
+     * @throws Exception
+     *      this is a exception
+     */
     public void testSortingWorkFlow() throws Exception {
         LinkedList<Influencer> data = new LinkedList<>();
         

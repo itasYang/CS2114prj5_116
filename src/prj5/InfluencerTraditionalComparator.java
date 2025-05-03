@@ -2,6 +2,13 @@ package prj5;
 
 import java.util.Comparator;
 
+// -------------------------------------------------------------------------
+/**
+ *  Comparison with data calculated by traditional methods
+ * 
+ * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
+ * @version 2025.5.3
+ */
 public class InfluencerTraditionalComparator implements Comparator<Influencer> {
     @Override
     public int compare(Influencer a, Influencer b) {

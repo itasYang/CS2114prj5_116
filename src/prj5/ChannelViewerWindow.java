@@ -2,9 +2,15 @@ package prj5;
 
 import cs2.*;
 import java.awt.Color;
-import java.io.IOException;
 import student.TestableRandom;
 
+// -------------------------------------------------------------------------
+/**
+ *  this is a GUI to show the graph of data
+ * 
+ * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
+ * @version 2025.4.24
+ */
 public class ChannelViewerWindow {
     private Window window;
     private LinkedList<Influencer> influencers;
@@ -14,10 +20,14 @@ public class ChannelViewerWindow {
     private boolean january;
     private boolean february;
     private boolean march;
-    private boolean firstQuarter;
     private boolean traditionalRate;
-    private boolean reachRate;
 
+    // ----------------------------------------------------------
+    /**
+     * this is a constructor
+     * @param influencers
+     *      is data in influencers
+     */
     public ChannelViewerWindow(LinkedList<Influencer> influencers) {
 
         this.influencers = influencers;
@@ -28,9 +38,7 @@ public class ChannelViewerWindow {
         january           = false;
         february          = false;
         march             = false;
-        firstQuarter      = true;
         traditionalRate   = true;
-        reachRate         = false;
 
 
         window = new Window();
@@ -79,63 +87,101 @@ public class ChannelViewerWindow {
 
 
 
+    // ----------------------------------------------------------
+    /**
+     * is a button to quit
+     * @param b
+     *      is a button
+     */
     public void quitButtonClicked(Button b) {
         System.exit(0);
     }
-
+    /**
+     * is a button to sort by channel name
+     * @param b
+     *      is a button
+     */
     public void sortByChannelNameClicked(Button b) {
         sortByName       = true;
         sortByEngagement = false;
         displayChannels();
     }
-
+    /**
+     * is a button to sort by engagement rate
+     * @param b
+     *      is a button
+     */
     public void sortByEngagementRateClicked(Button b) {
         sortByEngagement = true;
         sortByName       = false;
         displayChannels();
     }
-
+    /**
+     * is a button to show traditional rate
+     * @param b
+     *      is a button
+     */
     public void showTraditionalRate(Button b) {
         traditionalRate = true;
-        reachRate       = false;
+
         displayChannels();
     }
-
+    /**
+     * is a button to show reach rate
+     * @param b
+     *      is a button
+     */
     public void showReachRate(Button b) {
-        reachRate       = true;
+
         traditionalRate = false;
         displayChannels();
     }
-
+    /**
+     * is a button to show January
+     * @param b
+     *      is a button
+     */
     public void showJanuary(Button b) {
         january      = true;
         february     = false;
         march        = false;
-        firstQuarter = false;
+
         displayChannels();
     }
-
+    /**
+     * is a button to show February
+     * @param b
+     *      is a button
+     */
     public void showFebruary(Button b) {
         january      = false;
         february     = true;
         march        = false;
-        firstQuarter = false;
+
         displayChannels();
     }
-
+    /**
+     * is a button to show March
+     * @param b
+     *      is a button
+     */
     public void showMarch(Button b) {
         january      = false;
         february     = false;
         march        = true;
-        firstQuarter = false;
+
         displayChannels();
     }
-
+    /**
+     * is a button to show quarter
+     * @param b
+     *      is a button
+     */
     public void showQuarter(Button b) {
         january      = false;
         february     = false;
         march        = false;
-        firstQuarter = true;
+
         displayChannels();
     }
 
@@ -195,10 +241,22 @@ public class ChannelViewerWindow {
         }
 
         String mLabel;
-        if (january)      mLabel = "January";
-        else if (february) mLabel = "February";
-        else if (march)    mLabel = "March";
-        else               mLabel = "Quarter";
+        if (january)      
+        {
+            mLabel = "January";
+        }
+        else if (february) 
+        {
+            mLabel = "February";
+        }
+        else if (march)   
+        {
+            mLabel = "March";
+        }
+        else
+        {
+            mLabel = "Quarter";
+        }
 
         String rateLabel = traditionalRate
                          ? "Traditional Engagement Rate"
@@ -216,15 +274,30 @@ public class ChannelViewerWindow {
 
     private double valueFor(Influencer inf) {
         String monthKey;
-        if (january)      monthKey = "January";
-        else if (february) monthKey = "February";
-        else if (march)    monthKey = "March";
-        else               monthKey = "Quarter";
+        if (january)
+        {
+            monthKey = "January";
+        }
+            
+        else if (february)
+        {
+            monthKey = "February";
+        }
+        else if (march) 
+        {    
+            monthKey = "March";
+        }
+        else   
+        {
+            monthKey = "Quarter";
+        }
 
-        if (traditionalRate) {
+        if (traditionalRate) 
+        {
             return inf.getTraditionalRateForMonth(monthKey);
         }
-        else {
+        else 
+        {
             return inf.getReachRateForMonth(monthKey);
         }
     }

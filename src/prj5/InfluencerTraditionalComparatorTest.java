@@ -2,20 +2,27 @@ package prj5;
 
 import java.lang.reflect.Field;
 
+
+// -------------------------------------------------------------------------
 /**
- * Unit tests for {@link InfluencerTraditionalComparator}.
+ *  this is a influencer traditional comparator test
+ * 
+ * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
+ * @version 2025.4.24
  */
 public class InfluencerTraditionalComparatorTest extends student.TestCase {
 
     private InfluencerTraditionalComparator comp;
 
-
+    /**
+     * this is a setup
+     */
     public void setUp() {
         comp = new InfluencerTraditionalComparator();
     }
 
     /**
-     * Builds an {@link Influencer} with an injected traditional engagement rate.
+     * this is a test
      */
     private Influencer inf(String channel, double traditionalRate) {
         try {
@@ -31,7 +38,7 @@ public class InfluencerTraditionalComparatorTest extends student.TestCase {
     }
 
     /**
-     * Higher traditional rate should sort before (i.e., comparator returns < 0).
+     * this is a test
      */
     public void testDescending() {
         Influencer high = inf("high", 8.4);
