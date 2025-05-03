@@ -1,15 +1,24 @@
 package prj5;
 
 import cs2.*;
+import java.awt.Color;
 import java.io.IOException;
 import java.nio.channels.Channel;
+import student.TestableRandom;
 
 public class ChannelViewerWindow
 {
+
     private Window window;
     private LinkedList<Influencer> influencers;
-    private boolean sortByChannel = true;
-    private boolean showTraditional = true;
+    private boolean sortByName;
+    private boolean sortByEngagement;
+    private boolean januray;
+    private boolean february;
+    private boolean march;
+    private boolean firstQuarter;
+    private boolean traditionalRate;
+    private boolean engagementRate;
     private Shape ch1_shape;
     private Shape ch2_shape;
     private Shape ch3_shape;
@@ -31,9 +40,24 @@ public class ChannelViewerWindow
     public ChannelViewerWindow()
         throws IOException
     {
+        sortByName = true;
+        sortByEngagement = false;
+        januray = false;
+        february = false;
+        march = false;
+        firstQuarter = true;
+        traditionalRate = true;
+        engagementRate = false;
+
         window = new Window();
         window.setSize(800, 600);
         window.setTitle("Social Media Vis");
+
+        ch1_shape = new Shape(50, 100, painter());
+        ch2_shape = new Shape(150, 100, painter());
+        ch3_shape = new Shape(250, 100, painter());
+        ch4_shape = new Shape(150, 100, painter());
+
         InputFileReader reader = new InputFileReader("SocialMediaData.csv");
         influencers = reader.getInfluencers();
 
@@ -73,7 +97,7 @@ public class ChannelViewerWindow
         firstQuarterButton = new Button("First Quarter (Jan-Mar)");
         firstQuarterButton.onClick(this, "showQuarter");
         window.addButton(firstQuarterButton, WindowSide.EAST);
-        // 等最后的window决定类
+        displayChannels();
     }
 
 
@@ -85,58 +109,122 @@ public class ChannelViewerWindow
 
     public void sortByChannelNameClicked(Button b)
     {
-        sortByChannel = true;
-        // 等刷新方法
+        sortByName = true;
+        sortByEngagement = false;
+        displayChannels();
     }
 
 
     public void sortByEngagementRateClicked(Button b)
     {
-        sortByChannel = false;
-        // 等刷新方法
+        sortByEngagement = true;
+        sortByName = false;
+        displayChannels();
 
     }
 
 
     public void showTraditionalRate(Button b)
     {
-        showTraditional = true;
-        // 等刷新方法
-        ;
+        traditionalRate = true;
+        engagementRate = false;
+        displayChannels();
+
     }
 
 
     public void showReachRate(Button b)
     {
-        showTraditional = false;
-        // 等刷新方法
-
+        engagementRate = true;
+        traditionalRate = false;
+        displayChannels();
     }
 
 
     public void showJanuary(Button b)
     {
+        januray = true;
+        february = false;
+        march = false;
+        firstQuarter = false;
+
+        displayChannels();
     }
 
 
     public void showFebruary(Button b)
     {
+        januray = false;
+        february = true;
+        march = false;
+        firstQuarter = false;
+        displayChannels();
     }
 
 
     public void showMarch(Button b)
     {
+        januray = false;
+        february = false;
+        march = true;
+        firstQuarter = false;
+        displayChannels();
     }
 
 
     public void showQuarter(Button b)
     {
-        window.removeAllShapes();
+        januray = false;
+        february = false;
+        march = false;
+        firstQuarter = true;
+        displayChannels();
+    }
+
+
+    private Color painter()
+    {
+        TestableRandom random = new TestableRandom();
+        int r = random.nextInt(226);
+        int g = random.nextInt(226);
+        int b = random.nextInt(226);
+        Color color = new Color(r, g, b);
+        return color;
     }
 
 
     private void displayChannels()
     {
+        window.removeAllShapes();
+
+        if (januray)
+        {
+
+        }
+        else if (february)
+        {
+
+        }
+        else if (march)
+        {
+        }
+        else
+        {
+        }
+        if (sortByName)
+        {
+        }
+        else
+        {
+        }
+        if (traditionalRate)
+        {
+
+        }
+        else
+        {
+        }
+
     }
 
 }
