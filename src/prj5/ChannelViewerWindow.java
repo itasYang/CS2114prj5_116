@@ -73,6 +73,7 @@ public class ChannelViewerWindow
         firstQuarterButton = new Button("First Quarter (Jan-Mar)");
         firstQuarterButton.onClick(this, "showQuarter");
         window.addButton(firstQuarterButton, WindowSide.EAST);
+        // 等最后的window决定类
     }
 
 
@@ -129,6 +130,12 @@ public class ChannelViewerWindow
 
 
     public void showQuarter(Button b)
+    {
+        window.removeAllShapes();
+    }
+
+
+    private void displayChannels()
     {
     }
 
