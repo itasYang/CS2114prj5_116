@@ -19,7 +19,7 @@ public class Influencer {
     private double traditionalRate;
     private double reachRate;
 
-    // —— 新增月度字段 —— 
+
     private int likesJan = 0;
     private int commentsJan = 0;
     private int viewsJan = 0;
@@ -33,7 +33,7 @@ public class Influencer {
     private int likesMar = 0;
     private int commentsMar = 0;
     private int viewsMar = 0;
-    // followersMarch 已存在
+
 
     // ----------------------------------------------------------
     /**
@@ -81,14 +81,14 @@ public class Influencer {
         if (!isValidMonth(month)) {
             return;
         }
-        // 季度汇总
+
         totalLikesQuarter += likes;
         totalCommentsQuarter += comments;
         totalViewsQuarter += views;
         if ("March".equalsIgnoreCase(month)) {
             followersMarch = followers;
         }
-        // 月度存储
+
         if ("January".equalsIgnoreCase(month)) {
             likesJan = likes;
             commentsJan = comments;
@@ -105,7 +105,7 @@ public class Influencer {
             likesMar = likes;
             commentsMar = comments;
             viewsMar = views;
-            // followersMarch 已在上面设置
+
         }
     }
 
@@ -172,8 +172,7 @@ public class Influencer {
         return reachRate;
     }
 
-    // ----------------------------------------------------------
-    // 新增：按“January”、“February”、“March”或“Quarter”计算 traditionalRate
+
     public double getTraditionalRateForMonth(String month) {
         int likes = 0, comments = 0, followers = 0;
         switch (month.toLowerCase()) {
@@ -190,12 +189,12 @@ public class Influencer {
             case "march":
                 likes     = likesMar;
                 comments  = commentsMar;
-                followers = followersMarch;  // ← 这里改为 followersMarch
+                followers = followersMarch;
                 break;
             case "quarter":
                 likes     = likesJan + likesFeb + likesMar;
                 comments  = commentsJan + commentsFeb + commentsMar;
-                followers = followersMarch;  // 季度末 followers 用 March
+                followers = followersMarch;
                 break;
             default:
                 return -1.0;
@@ -206,8 +205,7 @@ public class Influencer {
         return (likes + comments) / (double)followers * 100.0;
     }
 
-    // ----------------------------------------------------------
-    // 新增：按“January”、“February”、“March”或“Quarter”计算 reachRate
+
     public double getReachRateForMonth(String month) {
         int likes = 0, comments = 0, views = 0;
         switch (month.toLowerCase()) {
