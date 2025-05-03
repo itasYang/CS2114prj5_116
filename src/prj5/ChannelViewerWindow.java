@@ -112,7 +112,6 @@ public class ChannelViewerWindow
     }
 
 
-    // The following methods could implement month-specific views later
     public void showJanuary(Button b)
     {
     }
