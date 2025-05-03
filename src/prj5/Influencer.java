@@ -7,8 +7,7 @@ package prj5;
  * @author Yinhan Wang, Ethan Yang, Chenghan Yang, Boyuan Zhao
  * @version 2025.4.24
  */
-public class Influencer
-{
+public class Influencer {
 
     private String channelName;
 
@@ -37,15 +36,16 @@ public class Influencer
         String username,
         String channelName,
         String country,
-        String mainTopic)
-    {
+        String mainTopic) {
         this.channelName = channelName;
     }
 
 
     // ----------------------------------------------------------
     /**
-     * Place a description of your method here.
+     * Add one month of numbers.
+     * The month must be “January”, “February”, or “March”
+     * .
      * 
      * @param month
      *            which Month
@@ -63,27 +63,27 @@ public class Influencer
         int likes,
         int comments,
         int followers,
-        int views)
-    {
-        if (!isValidMonth(month))
-        {
+        int views) {
+        if (!isValidMonth(month)) {
             return;
         }
         totalLikesQuarter += likes;
         totalCommentsQuarter += comments;
         totalViewsQuarter += views;
-        if ("March".equalsIgnoreCase(month))
-        {
+        if ("March".equalsIgnoreCase(month)) {
             followersMarch = followers;
         }
     }
 
-
-    private boolean isValidMonth(String month)
-    {
-        return "January".equalsIgnoreCase(month)
-            || "February".equalsIgnoreCase(month)
-            || "March".equalsIgnoreCase(month);
+    /**
+     * Check if month is Jan, Feb, or Mar.
+     *
+     * @param month word to check
+     * @return true if accepted, else false
+     */
+    private boolean isValidMonth(String month) {
+        return "January".equalsIgnoreCase(month) || "February".equalsIgnoreCase(
+            month) || "March".equalsIgnoreCase(month);
     }
 
 
@@ -91,27 +91,21 @@ public class Influencer
     /**
      * This is a method used to comput engagement rate.
      */
-    public void computeEngagementRates()
-    {
+    public void computeEngagementRates() {
 
-        if (followersMarch > 0)
-        {
-            traditionalRate =
-                ((double)(totalLikesQuarter + totalCommentsQuarter)
-                    / followersMarch) * 100.0;
+        if (followersMarch > 0) {
+            traditionalRate = ((double)(totalLikesQuarter
+                + totalCommentsQuarter) / followersMarch) * 100.0;
         }
-        else
-        {
+        else {
             traditionalRate = -1.0;
         }
 
-        if (totalViewsQuarter > 0)
-        {
+        if (totalViewsQuarter > 0) {
             reachRate = ((double)(totalLikesQuarter + totalCommentsQuarter)
                 / totalViewsQuarter) * 100.0;
         }
-        else
-        {
+        else {
             reachRate = -1.0;
         }
     }
@@ -123,8 +117,7 @@ public class Influencer
      * 
      * @return String channelName
      */
-    public String getChannelName()
-    {
+    public String getChannelName() {
         return channelName;
     }
 
@@ -135,8 +128,7 @@ public class Influencer
      * 
      * @return traditionalRate traditionalRate.
      */
-    public double getTraditionalRate()
-    {
+    public double getTraditionalRate() {
         return traditionalRate;
     }
 
@@ -147,8 +139,7 @@ public class Influencer
      * 
      * @return reachRate reachRate
      */
-    public double getReachRate()
-    {
+    public double getReachRate() {
         return reachRate;
     }
 
