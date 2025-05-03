@@ -75,13 +75,60 @@ public class ChannelViewerWindow
     }
 
 
-    public void quitButtonClicked(Button button)
+    public void quitButtonClicked(Button b)
     {
         System.exit(0);
     }
 
 
-    public void sortByChannelNameButtonClicked()
+    public void sortByChannelNameClicked(Button b)
+    {
+        sortByChannel = true;
+        // 等刷新方法
+    }
+
+
+    public void sortByEngagementRateClicked(Button b)
+    {
+        sortByChannel = false;
+        // 等刷新方法
+
+    }
+
+
+    public void showTraditionalRate(Button b)
+    {
+        showTraditional = true;
+        // 等刷新方法
+        ;
+    }
+
+
+    public void showReachRate(Button b)
+    {
+        showTraditional = false;
+        // 等刷新方法
+
+    }
+
+
+    // The following methods could implement month-specific views later
+    public void showJanuary(Button b)
+    {
+    }
+
+
+    public void showFebruary(Button b)
+    {
+    }
+
+
+    public void showMarch(Button b)
+    {
+    }
+
+
+    public void showQuarter(Button b)
     {
     }
 
