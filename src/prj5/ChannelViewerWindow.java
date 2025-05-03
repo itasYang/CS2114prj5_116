@@ -29,7 +29,7 @@ public class ChannelViewerWindow
         window = new Window("Social Media Vis");
 
         quitButton = new Button("Quit");
-
+        quitButton.onClick(this, "quitButtonClicked");
         sortByChannelNameButton = new Button("Sort by Channel Name");
 
         sortByEngagementRateButton = new Button("Sort by Engagement Rate");
@@ -42,6 +42,12 @@ public class ChannelViewerWindow
         februaryButton = new Button("February");
         marchButton = new Button("March");
         firstQuarterButton = new Button("First Quarter (Jan-March)");
+    }
+
+
+    public void quitButtonClicked(Button button)
+    {
+        System.exit(0);
     }
 
 }
