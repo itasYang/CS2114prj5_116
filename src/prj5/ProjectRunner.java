@@ -10,13 +10,8 @@ import java.text.DecimalFormat;
  * @author Yinhan Wang, Ethan Yang, Boyuan Zhao, Chenghan Yang
  * @version 2025/04/24
  */
-public class ProjectRunner
-{
-    // ~ Fields ................................................................
+public class ProjectRunner {
 
-    // ~ Constructors ..........................................................
-
-    // ~Public Methods ........................................................
     // ----------------------------------------------------------
     /**
      * This is the main method for this project.
@@ -24,9 +19,7 @@ public class ProjectRunner
      * @param args
      * @throws IOException
      */
-    public static void main(String[] args)
-        throws IOException
-    {
+    public static void main(String[] args) throws IOException {
         InputFileReader reader = (args.length > 0)
             ? new InputFileReader(args[0])
             : new InputFileReader("SampleInput1_2023.csv");
@@ -36,13 +29,11 @@ public class ProjectRunner
         boolean showConsole = true;
         boolean showGUI = false;
 
-        if (showConsole)
-        {
+        if (showConsole) {
             DecimalFormat df = new DecimalFormat("#.#");
 
             list.insertionSort(new InfluencerChannelNameComparator());
-            for (Influencer inf : list)
-            {
+            for (Influencer inf : list) {
                 System.out.println(inf.getChannelName());
                 double tr = inf.getTraditionalRate();
                 String out = (tr < 0) ? "N/A" : df.format(tr);
@@ -54,8 +45,7 @@ public class ProjectRunner
             System.out.println("**********");
 
             list.insertionSort(new InfluencerReachComparator());
-            for (Influencer inf : list)
-            {
+            for (Influencer inf : list) {
                 System.out.println(inf.getChannelName());
                 double rr = inf.getReachRate();
                 String out = (rr < 0) ? "N/A" : df.format(rr);
