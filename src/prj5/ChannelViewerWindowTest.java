@@ -2,7 +2,7 @@ package prj5;
 
 import java.lang.reflect.Field;
 import java.util.Iterator;
-import student.TestCase;
+
 
 /**
  * Basic GUI‑logic tests for {@link ChannelViewerWindow}.
@@ -17,7 +17,7 @@ import student.TestCase;
  * whole program manipulates, so checking the <em>order</em> of that list after
  * each interaction is a reliable proxy for what the chart would show.
  */
-public class ChannelViewerWindowTest extends TestCase {
+public class ChannelViewerWindowTest extends student.TestCase {
 
     /** Helper to seed private rate fields via reflection. */
     private Influencer make(String channel, double tradRate, double reachRate) {
