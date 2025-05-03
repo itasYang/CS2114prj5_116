@@ -17,6 +17,7 @@ public class InfluencerTest extends student.TestCase {
      */
     public void setUp() {
         influencer = new Influencer("test_user", "TestChannel", "USA", "Tech");
+
     }
 
 
@@ -89,5 +90,83 @@ public class InfluencerTest extends student.TestCase {
         assertEquals(67.5, influencer.getTraditionalRate(), 0.01);
 
         assertEquals(-1.0, influencer.getReachRate(), 0.01);
+    }
+    /**
+     * this is a test
+     */
+    public void testTraditionalRatePerMonth() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+        influencer.computeEngagementRates();
+        assertEquals(15.0, influencer.getTraditionalRateForMonth("January"), 0.001);
+        assertEquals((20 + 10) / 110.0 * 100, influencer.getTraditionalRateForMonth("February"), 0.001);
+        assertEquals((30 + 15) / 120.0 * 100, influencer.getTraditionalRateForMonth("March"), 0.001);
+    }
+
+    /**
+     * this is a test
+     */
+    public void testReachRatePerMonth() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+        influencer.computeEngagementRates();
+        assertEquals((10 + 5) / 200.0 * 100, influencer.getReachRateForMonth("January"), 0.001);
+        assertEquals((20 + 10) / 220.0 * 100, influencer.getReachRateForMonth("February"), 0.001);
+        assertEquals((30 + 15) / 240.0 * 100, influencer.getReachRateForMonth("March"), 0.001);
+    }
+    /**
+     * this is a test
+     */
+    public void testQuarterTraditionalRate() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+        influencer.computeEngagementRates();
+
+        double expected = (10 + 5 + 20 + 10 + 30 + 15) / 120.0 * 100;
+        assertEquals(expected, influencer.getTraditionalRateForMonth("Quarter"), 0.001);
+    }
+
+    /**
+     * this is a test
+     */
+    public void testQuarterReachRate() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+        influencer.computeEngagementRates();
+
+        double expected = (10 + 5 + 20 + 10 + 30 + 15) / (200 + 220 + 240.0) * 100;
+        assertEquals(expected, influencer.getReachRateForMonth("Quarter"), 0.001);
+    }
+
+    /**
+     * this is a test
+     */
+    public void testInvalidMonthReturnsMinusOne() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+        influencer.computeEngagementRates();
+        assertEquals(-1.0, influencer.getTraditionalRateForMonth("April"), 0.001);
+        assertEquals(-1.0, influencer.getReachRateForMonth("april"), 0.001);
+    }
+
+    /**
+     * this is a test
+     */
+    public void testZeroFollowersOrViewsReturnsMinusOne() {
+        influencer.addMonthData("January", 10, 5, 100, 200);
+        influencer.addMonthData("February", 20, 10, 110, 220);
+        influencer.addMonthData("March", 30, 15, 120, 240);
+        influencer.computeEngagementRates();
+        Influencer empty = new Influencer("u", "c", "country", "topic");
+        empty.addMonthData("January", 5, 5, 0, 0);
+        empty.computeEngagementRates();
+
+        assertEquals(-1.0, empty.getTraditionalRateForMonth("January"), 0.001);
+        assertEquals(-1.0, empty.getReachRateForMonth("January"), 0.001);
     }
 }

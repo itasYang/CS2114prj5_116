@@ -182,7 +182,10 @@ public class Influencer {
      *      return traditional rate
      */
     public double getTraditionalRateForMonth(String month) {
-        int likes = 0, comments = 0, followers = 0;
+        int likes = 0; 
+        int comments = 0; 
+        int followers = 0;
+        
         switch (month.toLowerCase()) {
             case "january":
                 likes     = likesJan;
@@ -223,7 +226,9 @@ public class Influencer {
      *      return reach rate for month
      */
     public double getReachRateForMonth(String month) {
-        int likes = 0, comments = 0, views = 0;
+        int likes = 0;
+        int comments = 0;
+        int views = 0;
         switch (month.toLowerCase()) {
             case "january":
                 likes    = likesJan;
